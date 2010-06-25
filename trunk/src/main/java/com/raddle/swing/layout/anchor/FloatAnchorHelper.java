@@ -176,10 +176,10 @@ public class FloatAnchorHelper {
                             }
                         } else if (locationType == LOCATION_TYPE.CENTER) {
                             if (alignmentX >= 0) {
-                                self.setLocation((int) (outer.getWidth() * alignmentX - self.getWidth() / 2), self.getY());
+                                self.setLocation((int) (outer.getWidth() * alignmentX - self.getWidth() / 2) + dynamicPadding.getLeftPad(), self.getY());
                             }
                             if (alignmentY >= 0) {
-                                self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentY - self.getHeight() / 2));
+                                self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentY - self.getHeight() / 2) + dynamicPadding.getTopPad());
                             }
                         }
                     }
