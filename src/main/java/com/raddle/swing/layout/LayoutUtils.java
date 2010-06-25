@@ -13,19 +13,37 @@ import com.raddle.swing.layout.anchor.FloatAnchorHelper;
  * @author xurong 2009-3-26 上午10:34:38
  */
 public class LayoutUtils {
+
     /**
      * 左上角相对定位
+     *
      * @param outer
      * @param self
      * @param alignmentX 宽度的百分比
      * @param alignmentY 高度百分比
      * @return
      */
-    public static AnchorHelper bindAnchor(Container outer, Component self, double alignmentX, double alignmentY) {
-        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY);
+    public static AnchorHelper bindAnchorLT(Container outer, Component self, double alignmentX, double alignmentY) {
+        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, true);
         helper.anchor();
         return helper;
     }
+
+    /**
+     * 右下角相对定位
+     *
+     * @param outer
+     * @param self
+     * @param alignmentX 宽度的百分比
+     * @param alignmentY 高度百分比
+     * @return
+     */
+    public static AnchorHelper bindAnchorRB(Container outer, Component self, double alignmentX, double alignmentY) {
+        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, false);
+        helper.anchor();
+        return helper;
+    }
+
     /**
      * 右下绝对定位
      *
@@ -55,7 +73,6 @@ public class LayoutUtils {
         helper.anchor();
         return helper;
     }
-
 
     /**
      * 右下浮动，绝对距离
@@ -88,7 +105,7 @@ public class LayoutUtils {
     }
 
     /**
-     * 相对浮动
+     * 相对左上浮动
      *
      * @param outer
      * @param self
@@ -96,8 +113,23 @@ public class LayoutUtils {
      * @param alignmentY 高度百分比
      * @return
      */
-    public static FloatAnchorHelper bindFloatAnchor(Container outer, Component self, double alignmentX, double alignmentY) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY);
+    public static FloatAnchorHelper bindFloatAnchorLT(Container outer, Component self, double alignmentX, double alignmentY) {
+        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, true);
+        helper.floating();
+        return helper;
+    }
+
+    /**
+     * 相对右下浮动
+     *
+     * @param outer
+     * @param self
+     * @param alignmentX 宽度的百分比
+     * @param alignmentY 高度百分比
+     * @return
+     */
+    public static FloatAnchorHelper bindFloatAnchorRB(Container outer, Component self, double alignmentX, double alignmentY) {
+        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, false);
         helper.floating();
         return helper;
     }
