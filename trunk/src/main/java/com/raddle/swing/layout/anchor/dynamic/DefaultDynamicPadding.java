@@ -13,6 +13,10 @@ import java.awt.Container;
 public class DefaultDynamicPadding implements DynamicPadding {
 
     protected Container outer;
+    private int         leftPad   = 0;
+    private int         topPad    = 0;
+    private int         rightPad  = 0;
+    private int         bottomPad = 0;
 
     public DefaultDynamicPadding(Container outer){
         this.outer = outer;
@@ -20,26 +24,42 @@ public class DefaultDynamicPadding implements DynamicPadding {
 
     @Override
     public int getBottomPad() {
-        return 0;
+        return bottomPad;
     }
 
     @Override
     public int getTopPad() {
-        return 0;
+        return topPad;
     }
 
     @Override
     public int getLeftPad() {
-        return 0;
+        return leftPad;
     }
 
     @Override
     public int getRightPad() {
-        return 0;
+        return rightPad;
     }
 
     public Container getOuter() {
         return outer;
+    }
+
+    public void setLeftPad(int leftPad) {
+        this.leftPad = leftPad;
+    }
+
+    public void setTopPad(int topPad) {
+        this.topPad = topPad;
+    }
+
+    public void setRightPad(int rightPad) {
+        this.rightPad = rightPad;
+    }
+
+    public void setBottomPad(int bottomPad) {
+        this.bottomPad = bottomPad;
     }
 
 }

@@ -106,15 +106,27 @@ public class FloatAnchorHelper {
      * @param alignmentX 左边距的百分比
      * @param alignmentY 上边距的百分比
      */
-    public FloatAnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, boolean isLT){
+    public FloatAnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad, boolean isLT){
         this.outer = outer;
         this.self = self;
         if (isLT) {
             this.alignmentL = alignmentX;
             this.alignmentT = alignmentY;
+            if (xPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setLeftPad(xPad);
+            }
+            if (yPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setTopPad(yPad);
+            }
         } else {
             this.alignmentR = alignmentX;
             this.alignmentB = alignmentY;
+            if (xPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setRightPad(xPad);
+            }
+            if (yPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setBottomPad(yPad);
+            }
         }
         this.floatType = FLOAT_TYPE.RELATIVE;
         dynamicPadding = new DefaultDynamicPadding(outer);

@@ -13,18 +13,17 @@ import javax.swing.WindowConstants;
 
 import com.raddle.swing.layout.LayoutUtils;
 
-
 public class AnchorHelperTest extends javax.swing.JFrame {
 
     private static final long serialVersionUID = 1L;
-    private JDesktopPane jDesktopPane1;
-    private JButton      jButton1;
-    private JButton      jButton3;
-    private JTextPane    jTextPane1;
-    private JScrollPane  jScrollPane1;
-    private JButton      jButton2;
-    private JButton      jButton5;
-    private JButton      jButton4;
+    private JDesktopPane      jDesktopPane1;
+    private JButton           jButton1;
+    private JButton           jButton3;
+    private JTextPane         jTextPane1;
+    private JScrollPane       jScrollPane1;
+    private JButton           jButton2;
+    private JButton           jButton5;
+    private JButton           jButton4;
 
     /**
      * Auto-generated main method to display this JFrame
@@ -48,10 +47,10 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         LayoutUtils.bindAnchorRB(jDesktopPane1, jButton1, true, false);
         LayoutUtils.bindAnchorRB(jDesktopPane1, jScrollPane1, true, true);
         //相对边框
-        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0.5, -1);
+        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0.5, -1, -1, -1);
 
         // 相对浮动
-        LayoutUtils.bindFloatAnchorLT(jDesktopPane1, jButton3, -1, 0.5);
+        LayoutUtils.bindFloatAnchorLT(jDesktopPane1, jButton3, -1, 0.5, -1, -1);
 
         // 跟随浮动
         LayoutUtils.bindAnchorFollow(jButton3, jButton2, -1, 5, -1, -1);
