@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import com.raddle.swing.layout.LayoutUtils;
-import com.raddle.swing.layout.anchor.dynamic.DefaultDynamicPadding;
 
 
 public class AnchorHelperTest extends javax.swing.JFrame {
@@ -51,15 +50,14 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         LayoutUtils.bindAnchorRB(jDesktopPane1, jScrollPane1, true, true);
 
         // 浮动
-        LayoutUtils.bindFloatAnchorRB(jDesktopPane1, jButton4, true, false);
-        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0, -1).setDynamicPadding(new DefaultDynamicPadding(jDesktopPane1) {
-            @Override
-            public int getLeftPad() {
-                return outer.getWidth()/2;
-            }
-        });
-        LayoutUtils.bindCenterAnchor(jDesktopPane1, jButton3, false, true);
-        LayoutUtils.bindCenterAnchor(jDesktopPane1, jButton5,true,false);
+//        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0, -1).setDynamicPadding(new DefaultDynamicPadding(jDesktopPane1) {
+//            @Override
+//            public int getLeftPad() {
+//                return outer.getWidth()/2;
+//            }
+//        });
+        LayoutUtils.bindFloatAnchor(jDesktopPane1, jButton3, -1, 0.5);
+        LayoutUtils.bindAnchorFollow(jButton3, jButton2, -1, 5, -1, -1);
     }
 
     private void initGUI() {
@@ -110,7 +108,7 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                 {
                     jButton5 = new JButton();
                     jDesktopPane1.add(jButton5);
-                    jButton5.setText("横向浮动中间");
+                    jButton5.setText("jButton5");
                     jButton5.setBounds(108, 101, 118, 23);
                 }
             }
