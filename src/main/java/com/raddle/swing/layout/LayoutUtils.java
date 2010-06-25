@@ -13,7 +13,19 @@ import com.raddle.swing.layout.anchor.FloatAnchorHelper;
  * @author xurong 2009-3-26 上午10:34:38
  */
 public class LayoutUtils {
-
+    /**
+     * 左上角相对定位
+     * @param outer
+     * @param self
+     * @param alignmentX 宽度的百分比
+     * @param alignmentY 高度百分比
+     * @return
+     */
+    public static AnchorHelper bindAnchor(Container outer, Component self, double alignmentX, double alignmentY) {
+        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY);
+        helper.anchor();
+        return helper;
+    }
     /**
      * 右下绝对定位
      *
@@ -80,8 +92,8 @@ public class LayoutUtils {
      *
      * @param outer
      * @param self
-     * @param alignmentX 左边距百分比d
-     * @param alignmentY 上边距百分比
+     * @param alignmentX 宽度的百分比
+     * @param alignmentY 高度百分比
      * @return
      */
     public static FloatAnchorHelper bindFloatAnchor(Container outer, Component self, double alignmentX, double alignmentY) {
