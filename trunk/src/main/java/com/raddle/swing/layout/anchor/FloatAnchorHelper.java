@@ -174,7 +174,7 @@ public class FloatAnchorHelper {
                             self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentT) + dynamicPadding.getTopPad());
                         }
                         if (alignmentR >= 0) {
-                            self.setLocation(outer.getWidth() - ((int) (outer.getHeight() * alignmentR) + dynamicPadding.getRightPad()) - self.getWidth(), self.getY());
+                            self.setLocation(outer.getWidth() - ((int) (outer.getWidth() * alignmentR) + dynamicPadding.getRightPad()) - self.getWidth(), self.getY());
                         }
                         if (alignmentB >= 0) {
                             self.setLocation(self.getX(), outer.getHeight() - ((int) (outer.getHeight() * alignmentR) + dynamicPadding.getBottomPad()) - self.getHeight());
