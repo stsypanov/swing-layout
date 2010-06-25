@@ -52,7 +52,7 @@ public class AnchorHelperTest extends javax.swing.JFrame {
 
         // 浮动
         LayoutUtils.bindFloatAnchorRB(jDesktopPane1, jButton4, true, false);
-        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0, -1).setAnchorOutRectangle(new DefaultDynamicPadding(jDesktopPane1) {
+        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0, -1).setDynamicPadding(new DefaultDynamicPadding(jDesktopPane1) {
             @Override
             public int getLeftPad() {
                 return outer.getWidth()/2;
