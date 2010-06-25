@@ -44,19 +44,16 @@ public class AnchorHelperTest extends javax.swing.JFrame {
     public AnchorHelperTest(){
         super();
         initGUI();
-        // 放在初始化之后
+        // 固定边框
         LayoutUtils.bindAnchorRB(jDesktopPane1, jButton1, true, false);
-        LayoutUtils.bindAnchorRB(jDesktopPane1, jButton2, false, true);
         LayoutUtils.bindAnchorRB(jDesktopPane1, jScrollPane1, true, true);
+        //相对边框
+        LayoutUtils.bindAnchor(jDesktopPane1, jButton4, 0.5, -1);
 
-        // 浮动
-//        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0, -1).setDynamicPadding(new DefaultDynamicPadding(jDesktopPane1) {
-//            @Override
-//            public int getLeftPad() {
-//                return outer.getWidth()/2;
-//            }
-//        });
+        // 相对浮动
         LayoutUtils.bindFloatAnchor(jDesktopPane1, jButton3, -1, 0.5);
+
+        // 跟随浮动
         LayoutUtils.bindAnchorFollow(jButton3, jButton2, -1, 5, -1, -1);
     }
 
@@ -69,14 +66,14 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                 {
                     jButton1 = new JButton();
                     jDesktopPane1.add(jButton1);
-                    jButton1.setText("右边框跟随");
+                    jButton1.setText("右边框跟随1");
                     jButton1.setBounds(273, 12, 100, 23);
                 }
                 {
                     jButton2 = new JButton();
                     jDesktopPane1.add(jButton2);
-                    jButton2.setText("下边框跟随");
-                    jButton2.setBounds(12, 230, 116, 23);
+                    jButton2.setText("下边框跟随2");
+                    jButton2.setBounds(12, 230, 120, 23);
                 }
                 {
                     jScrollPane1 = new JScrollPane();
@@ -91,14 +88,14 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                 {
                     jButton3 = new JButton();
                     jDesktopPane1.add(jButton3);
-                    jButton3.setText("纵向中间浮动");
-                    jButton3.setBounds(12, 12, 116, 23);
+                    jButton3.setText("纵向中间浮动3");
+                    jButton3.setBounds(12, 12, 120, 23);
                 }
                 {
                     jButton4 = new JButton();
                     jDesktopPane1.add(jButton4);
-                    jButton4.setText("跟随中间和右边");
-                    jButton4.setBounds(287, 52, 86, 23);
+                    jButton4.setText("跟随中间和右边4");
+                    jButton4.setBounds(287, 52, 150, 23);
                     jButton4.addActionListener(new ActionListener() {
 
                         public void actionPerformed(ActionEvent evt) {

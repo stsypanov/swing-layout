@@ -7,8 +7,8 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JScrollPane;
 
-import com.raddle.swing.layout.anchor.dynamic.DynamicPadding;
 import com.raddle.swing.layout.anchor.dynamic.DefaultDynamicPadding;
+import com.raddle.swing.layout.anchor.dynamic.DynamicPadding;
 
 /**
  * 类AnchorHelper.java的实现描述：固定跟随边框，保持和边距，不跟随的边位置保持不便
@@ -16,6 +16,7 @@ import com.raddle.swing.layout.anchor.dynamic.DefaultDynamicPadding;
  * @author xurong 2009-6-14 下午12:57:21
  */
 public class AnchorHelper {
+
     public static enum ANCHOR_TYPE {
         /**
          * 绝对定位，和边框保持绝对数值的大小
@@ -26,22 +27,27 @@ public class AnchorHelper {
          */
         RELATIVE
     };
-    private Container          outer;
-    private Component          self;
-    private int                leftPad      = -1;
-    private int                topPad       = -1;
-    private int                rightPad     = -1;
-    private int                bottomPad    = -1;
-    private boolean            anchorLeft   = false;
-    private boolean            anchorTop    = false;
-    private boolean            anchorRight  = false;
-    private boolean            anchorBottom = false;
-    private boolean            listening    = false;
+
+    private Container      outer;
+    private Component      self;
+    private int            leftPad      = -1;
+    private int            topPad       = -1;
+    private int            rightPad     = -1;
+    private int            bottomPad    = -1;
+    private boolean        anchorLeft   = false;
+    private boolean        anchorTop    = false;
+    private boolean        anchorRight  = false;
+    private boolean        anchorBottom = false;
+    private boolean        listening    = false;
+    private ANCHOR_TYPE    anchorType   = ANCHOR_TYPE.ABSOLUTE;
+    private double         alignmentX   = -1;
+    private double         alignmentY   = -1;
     private DynamicPadding dynamicPadding;
 
     public AnchorHelper(Container outer, Component self){
         this.outer = outer;
         this.self = self;
+        anchorType = ANCHOR_TYPE.ABSOLUTE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
@@ -66,6 +72,7 @@ public class AnchorHelper {
         this.anchorTop = topPad >= 0;
         this.anchorRight = rightPad >= 0;
         this.anchorBottom = bottomPad >= 0;
+        anchorType = ANCHOR_TYPE.ABSOLUTE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
@@ -86,6 +93,16 @@ public class AnchorHelper {
         this.anchorTop = anchorTop;
         this.anchorRight = anchorRight;
         this.anchorBottom = anchorBottom;
+        anchorType = ANCHOR_TYPE.ABSOLUTE;
+        dynamicPadding = new DefaultDynamicPadding(outer);
+    }
+
+    public AnchorHelper(Container outer, Component self, double alignmentX, double alignmentY){
+        this.outer = outer;
+        this.self = self;
+        this.alignmentX = alignmentX;
+        this.alignmentY = alignmentY;
+        anchorType = ANCHOR_TYPE.RELATIVE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
@@ -98,29 +115,38 @@ public class AnchorHelper {
             outer.addComponentListener(new ComponentAdapter() {
 
                 public void componentResized(ComponentEvent evt) {
-                    if (anchorLeft) {
-                        if (leftPad < 0) {
-                            leftPad = self.getX();
+                    if (anchorType == ANCHOR_TYPE.ABSOLUTE) {
+                        if (anchorLeft) {
+                            if (leftPad < 0) {
+                                leftPad = self.getX();
+                            }
+                            anchorLeft(self, leftPad + dynamicPadding.getLeftPad());
                         }
-                        anchorLeft(self, leftPad + dynamicPadding.getLeftPad());
-                    }
-                    if (anchorTop) {
-                        if (topPad < 0) {
-                            topPad = self.getY();
+                        if (anchorTop) {
+                            if (topPad < 0) {
+                                topPad = self.getY();
+                            }
+                            anchorTop(self, topPad + dynamicPadding.getTopPad());
                         }
-                        anchorTop(self, topPad + dynamicPadding.getTopPad());
-                    }
-                    if (anchorRight) {
-                        if (rightPad < 0) {
-                            rightPad = outer.getWidth() - self.getX() - self.getWidth();
+                        if (anchorRight) {
+                            if (rightPad < 0) {
+                                rightPad = outer.getWidth() - self.getX() - self.getWidth();
+                            }
+                            anchorRight(outer, self, rightPad + dynamicPadding.getRightPad());
                         }
-                        anchorRight(outer, self, rightPad + dynamicPadding.getRightPad());
-                    }
-                    if (anchorBottom) {
-                        if (bottomPad < 0) {
-                            bottomPad = outer.getHeight() - self.getY() - self.getHeight();
+                        if (anchorBottom) {
+                            if (bottomPad < 0) {
+                                bottomPad = outer.getHeight() - self.getY() - self.getHeight();
+                            }
+                            anchorBottom(outer, self, bottomPad + dynamicPadding.getBottomPad());
                         }
-                        anchorBottom(outer, self, bottomPad + dynamicPadding.getBottomPad());
+                    } else if (anchorType == ANCHOR_TYPE.RELATIVE) {
+                        if (alignmentX >= 0) {
+                            anchorLeft(self, (int) (outer.getWidth() * alignmentX) + dynamicPadding.getLeftPad());
+                        }
+                        if (alignmentY >= 0) {
+                            anchorTop(self, (int) (outer.getHeight() * alignmentY) + dynamicPadding.getTopPad());
+                        }
                     }
                 }
             });
@@ -255,5 +281,29 @@ public class AnchorHelper {
 
     public void setDynamicPadding(DynamicPadding anchorOutRectangle) {
         this.dynamicPadding = anchorOutRectangle;
+    }
+
+    public ANCHOR_TYPE getAnchorType() {
+        return anchorType;
+    }
+
+    public void setAnchorType(ANCHOR_TYPE anchorType) {
+        this.anchorType = anchorType;
+    }
+
+    public double getAlignmentX() {
+        return alignmentX;
+    }
+
+    public void setAlignmentX(double alignmentX) {
+        this.alignmentX = alignmentX;
+    }
+
+    public double getAlignmentY() {
+        return alignmentY;
+    }
+
+    public void setAlignmentY(double alignmentY) {
+        this.alignmentY = alignmentY;
     }
 }
