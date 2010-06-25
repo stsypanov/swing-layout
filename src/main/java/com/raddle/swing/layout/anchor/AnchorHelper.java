@@ -28,12 +28,12 @@ public class AnchorHelper {
     private boolean            anchorRight  = false;
     private boolean            anchorBottom = false;
     private boolean            listening    = false;
-    private DynamicPadding anchorOutRectangle;
+    private DynamicPadding dynamicPadding;
 
     public AnchorHelper(Container outer, Component self){
         this.outer = outer;
         this.self = self;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -57,7 +57,7 @@ public class AnchorHelper {
         this.anchorTop = topPad > -1;
         this.anchorRight = rightPad > -1;
         this.anchorBottom = bottomPad > -1;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -77,7 +77,7 @@ public class AnchorHelper {
         this.anchorTop = anchorTop;
         this.anchorRight = anchorRight;
         this.anchorBottom = anchorBottom;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -93,25 +93,25 @@ public class AnchorHelper {
                         if (leftPad == -1) {
                             leftPad = self.getX();
                         }
-                        anchorLeft(self, leftPad + anchorOutRectangle.getLeftPad());
+                        anchorLeft(self, leftPad + dynamicPadding.getLeftPad());
                     }
                     if (anchorTop) {
                         if (topPad == -1) {
                             topPad = self.getY();
                         }
-                        anchorTop(self, topPad + anchorOutRectangle.getTopPad());
+                        anchorTop(self, topPad + dynamicPadding.getTopPad());
                     }
                     if (anchorRight) {
                         if (rightPad == -1) {
                             rightPad = outer.getWidth() - self.getX() - self.getWidth();
                         }
-                        anchorRight(outer, self, rightPad + anchorOutRectangle.getRightPad());
+                        anchorRight(outer, self, rightPad + dynamicPadding.getRightPad());
                     }
                     if (anchorBottom) {
                         if (bottomPad == -1) {
                             bottomPad = outer.getHeight() - self.getY() - self.getHeight();
                         }
-                        anchorBottom(outer, self, bottomPad + anchorOutRectangle.getBottomPad());
+                        anchorBottom(outer, self, bottomPad + dynamicPadding.getBottomPad());
                     }
                 }
             });
@@ -240,11 +240,11 @@ public class AnchorHelper {
         this.anchorBottom = anchorBottom;
     }
 
-    public DynamicPadding getAnchorOutRectangle() {
-        return anchorOutRectangle;
+    public DynamicPadding getDynamicPadding() {
+        return dynamicPadding;
     }
 
-    public void setAnchorOutRectangle(DynamicPadding anchorOutRectangle) {
-        this.anchorOutRectangle = anchorOutRectangle;
+    public void setDynamicPadding(DynamicPadding anchorOutRectangle) {
+        this.dynamicPadding = anchorOutRectangle;
     }
 }

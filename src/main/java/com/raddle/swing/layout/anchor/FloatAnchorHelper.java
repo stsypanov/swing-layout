@@ -57,12 +57,12 @@ public class FloatAnchorHelper {
     private LOCATION_TYPE      locationType = LOCATION_TYPE.LEFT_TOP;
     private float              alignmentX   = 0;
     private float              alignmentY   = 0;
-    private DynamicPadding anchorOutRectangle;
+    private DynamicPadding dynamicPadding;
 
     public FloatAnchorHelper(Container outer, Component self){
         this.outer = outer;
         this.self = self;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -88,7 +88,7 @@ public class FloatAnchorHelper {
         this.anchorBottom = bottomPad > -1;
         this.floatType = FLOAT_TYPE.ABSOLUTE;
         this.locationType = LOCATION_TYPE.LEFT_TOP;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -110,7 +110,7 @@ public class FloatAnchorHelper {
         this.anchorBottom = anchorBottom;
         this.floatType = FLOAT_TYPE.ABSOLUTE;
         this.locationType = LOCATION_TYPE.LEFT_TOP;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -129,7 +129,7 @@ public class FloatAnchorHelper {
         this.alignmentY = alignmentY;
         this.floatType = FLOAT_TYPE.RELATIVE;
         this.locationType = locationType;
-        anchorOutRectangle = new DefaultDynamicPadding(outer);
+        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
@@ -146,33 +146,33 @@ public class FloatAnchorHelper {
                             if (leftPad == -1) {
                                 leftPad = self.getX();
                             }
-                            self.setLocation(leftPad + anchorOutRectangle.getLeftPad(), self.getY());
+                            self.setLocation(leftPad + dynamicPadding.getLeftPad(), self.getY());
                         }
                         if (anchorTop) {
                             if (topPad == -1) {
                                 topPad = self.getY();
                             }
-                            self.setLocation(self.getX(), topPad + anchorOutRectangle.getTopPad());
+                            self.setLocation(self.getX(), topPad + dynamicPadding.getTopPad());
                         }
                         if (anchorRight) {
                             if (rightPad == -1) {
                                 rightPad = outer.getWidth() - self.getX() - self.getWidth();
                             }
-                            self.setLocation(outer.getWidth() - (rightPad + anchorOutRectangle.getRightPad()) - self.getWidth(), self.getY());
+                            self.setLocation(outer.getWidth() - (rightPad + dynamicPadding.getRightPad()) - self.getWidth(), self.getY());
                         }
                         if (anchorBottom) {
                             if (bottomPad == -1) {
                                 bottomPad = outer.getHeight() - self.getY() - self.getHeight();
                             }
-                            self.setLocation(self.getX(), outer.getHeight() - (bottomPad + anchorOutRectangle.getBottomPad()) - self.getHeight());
+                            self.setLocation(self.getX(), outer.getHeight() - (bottomPad + dynamicPadding.getBottomPad()) - self.getHeight());
                         }
                     } else if (floatType == FLOAT_TYPE.RELATIVE) {
                         if (locationType == LOCATION_TYPE.LEFT_TOP) {
                         	if(alignmentX >= 0){
-                        		self.setLocation((int) (outer.getWidth() * alignmentX) + anchorOutRectangle.getLeftPad(), self.getY());
+                        		self.setLocation((int) (outer.getWidth() * alignmentX) + dynamicPadding.getLeftPad(), self.getY());
                         	}
                         	if (alignmentY >= 0) {
-                        		self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentY) + anchorOutRectangle.getTopPad());
+                        		self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentY) + dynamicPadding.getTopPad());
                             }
                         } else if (locationType == LOCATION_TYPE.CENTER) {
                             if (alignmentX >= 0) {
@@ -285,12 +285,12 @@ public class FloatAnchorHelper {
         this.alignmentY = alignmentY;
     }
 
-    public DynamicPadding getAnchorOutRectangle() {
-        return anchorOutRectangle;
+    public DynamicPadding getDynamicPadding() {
+        return dynamicPadding;
     }
 
-    public void setAnchorOutRectangle(DynamicPadding anchorOutRectangle) {
-        this.anchorOutRectangle = anchorOutRectangle;
+    public void setDynamicPadding(DynamicPadding anchorOutRectangle) {
+        this.dynamicPadding = anchorOutRectangle;
     }
 
 }
