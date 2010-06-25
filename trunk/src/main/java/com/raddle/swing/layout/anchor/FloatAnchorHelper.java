@@ -26,20 +26,22 @@ public class FloatAnchorHelper {
         RELATIVE
     };
 
-    private Container          outer;
-    private Component          self;
-    private int                leftPad      = -1;
-    private int                topPad       = -1;
-    private int                rightPad     = -1;
-    private int                bottomPad    = -1;
-    private boolean            anchorLeft   = false;
-    private boolean            anchorTop    = false;
-    private boolean            anchorRight  = false;
-    private boolean            anchorBottom = false;
-    private boolean            listening    = false;
-    private FLOAT_TYPE         floatType    = FLOAT_TYPE.ABSOLUTE;
-    private double              alignmentX   = -1;
-    private double              alignmentY   = -1;
+    private Container      outer;
+    private Component      self;
+    private int            leftPad      = -1;
+    private int            topPad       = -1;
+    private int            rightPad     = -1;
+    private int            bottomPad    = -1;
+    private boolean        anchorLeft   = false;
+    private boolean        anchorTop    = false;
+    private boolean        anchorRight  = false;
+    private boolean        anchorBottom = false;
+    private boolean        listening    = false;
+    private FLOAT_TYPE     floatType    = FLOAT_TYPE.ABSOLUTE;
+    private double         alignmentL   = -1;
+    private double         alignmentT   = -1;
+    private double         alignmentR   = -1;
+    private double         alignmentB   = -1;
     private DynamicPadding dynamicPadding;
 
     public FloatAnchorHelper(Container outer, Component self){
@@ -104,11 +106,16 @@ public class FloatAnchorHelper {
      * @param alignmentX 左边距的百分比
      * @param alignmentY 上边距的百分比
      */
-    public FloatAnchorHelper(Container outer, Component self, double alignmentX, double alignmentY){
+    public FloatAnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, boolean isLT){
         this.outer = outer;
         this.self = self;
-        this.alignmentX = alignmentX;
-        this.alignmentY = alignmentY;
+        if (isLT) {
+            this.alignmentL = alignmentX;
+            this.alignmentT = alignmentY;
+        } else {
+            this.alignmentR = alignmentX;
+            this.alignmentB = alignmentY;
+        }
         this.floatType = FLOAT_TYPE.RELATIVE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
@@ -148,11 +155,17 @@ public class FloatAnchorHelper {
                             self.setLocation(self.getX(), outer.getHeight() - (bottomPad + dynamicPadding.getBottomPad()) - self.getHeight());
                         }
                     } else if (floatType == FLOAT_TYPE.RELATIVE) {
-                    	if(alignmentX >= 0){
-                    		self.setLocation((int) (outer.getWidth() * alignmentX) + dynamicPadding.getLeftPad(), self.getY());
-                    	}
-                    	if (alignmentY >= 0) {
-                    		self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentY) + dynamicPadding.getTopPad());
+                        if (alignmentL >= 0) {
+                            self.setLocation((int) (outer.getWidth() * alignmentL) + dynamicPadding.getLeftPad(), self.getY());
+                        }
+                        if (alignmentT >= 0) {
+                            self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentT) + dynamicPadding.getTopPad());
+                        }
+                        if (alignmentR >= 0) {
+                            self.setLocation(outer.getWidth() - ((int) (outer.getHeight() * alignmentR) + dynamicPadding.getRightPad()) - self.getWidth(), self.getY());
+                        }
+                        if (alignmentB >= 0) {
+                            self.setLocation(self.getX(), outer.getHeight() - ((int) (outer.getHeight() * alignmentR) + dynamicPadding.getBottomPad()) - self.getHeight());
                         }
                     }
 
@@ -233,28 +246,44 @@ public class FloatAnchorHelper {
         this.floatType = floatType;
     }
 
-    public double getAlignmentX() {
-        return alignmentX;
-    }
-
-    public void setAlignmentX(double alignmentX) {
-        this.alignmentX = alignmentX;
-    }
-
-    public double getAlignmentY() {
-        return alignmentY;
-    }
-
-    public void setAlignmentY(double alignmentY) {
-        this.alignmentY = alignmentY;
-    }
-
     public DynamicPadding getDynamicPadding() {
         return dynamicPadding;
     }
 
     public void setDynamicPadding(DynamicPadding anchorOutRectangle) {
         this.dynamicPadding = anchorOutRectangle;
+    }
+
+    public double getAlignmentL() {
+        return alignmentL;
+    }
+
+    public void setAlignmentL(double alignmentL) {
+        this.alignmentL = alignmentL;
+    }
+
+    public double getAlignmentT() {
+        return alignmentT;
+    }
+
+    public void setAlignmentT(double alignmentT) {
+        this.alignmentT = alignmentT;
+    }
+
+    public double getAlignmentR() {
+        return alignmentR;
+    }
+
+    public void setAlignmentR(double alignmentR) {
+        this.alignmentR = alignmentR;
+    }
+
+    public double getAlignmentB() {
+        return alignmentB;
+    }
+
+    public void setAlignmentB(double alignmentB) {
+        this.alignmentB = alignmentB;
     }
 
 }

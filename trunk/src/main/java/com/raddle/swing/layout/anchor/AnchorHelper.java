@@ -40,8 +40,10 @@ public class AnchorHelper {
     private boolean        anchorBottom = false;
     private boolean        listening    = false;
     private ANCHOR_TYPE    anchorType   = ANCHOR_TYPE.ABSOLUTE;
-    private double         alignmentX   = -1;
-    private double         alignmentY   = -1;
+    private double         alignmentL   = -1;
+    private double         alignmentT   = -1;
+    private double         alignmentR   = -1;
+    private double         alignmentB   = -1;
     private DynamicPadding dynamicPadding;
 
     public AnchorHelper(Container outer, Component self){
@@ -97,11 +99,16 @@ public class AnchorHelper {
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
-    public AnchorHelper(Container outer, Component self, double alignmentX, double alignmentY){
+    public AnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, boolean isLT){
         this.outer = outer;
         this.self = self;
-        this.alignmentX = alignmentX;
-        this.alignmentY = alignmentY;
+        if (isLT) {
+            this.alignmentL = alignmentX;
+            this.alignmentT = alignmentY;
+        } else {
+            this.alignmentR = alignmentX;
+            this.alignmentB = alignmentY;
+        }
         anchorType = ANCHOR_TYPE.RELATIVE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
@@ -141,11 +148,17 @@ public class AnchorHelper {
                             anchorBottom(outer, self, bottomPad + dynamicPadding.getBottomPad());
                         }
                     } else if (anchorType == ANCHOR_TYPE.RELATIVE) {
-                        if (alignmentX >= 0) {
-                            anchorLeft(self, (int) (outer.getWidth() * alignmentX) + dynamicPadding.getLeftPad());
+                        if (alignmentL >= 0) {
+                            anchorLeft(self, (int) (outer.getWidth() * alignmentL) + dynamicPadding.getLeftPad());
                         }
-                        if (alignmentY >= 0) {
-                            anchorTop(self, (int) (outer.getHeight() * alignmentY) + dynamicPadding.getTopPad());
+                        if (alignmentT >= 0) {
+                            anchorTop(self, (int) (outer.getHeight() * alignmentT) + dynamicPadding.getTopPad());
+                        }
+                        if (alignmentR >= 0) {
+                            anchorRight(outer, self, (int) (outer.getWidth() * alignmentR) + dynamicPadding.getRightPad());
+                        }
+                        if (alignmentB >= 0) {
+                            anchorBottom(outer, self, (int) (outer.getHeight() * alignmentB) + dynamicPadding.getBottomPad());
                         }
                     }
                 }
@@ -291,19 +304,35 @@ public class AnchorHelper {
         this.anchorType = anchorType;
     }
 
-    public double getAlignmentX() {
-        return alignmentX;
+    public double getAlignmentL() {
+        return alignmentL;
     }
 
-    public void setAlignmentX(double alignmentX) {
-        this.alignmentX = alignmentX;
+    public void setAlignmentL(double alignmentL) {
+        this.alignmentL = alignmentL;
     }
 
-    public double getAlignmentY() {
-        return alignmentY;
+    public double getAlignmentT() {
+        return alignmentT;
     }
 
-    public void setAlignmentY(double alignmentY) {
-        this.alignmentY = alignmentY;
+    public void setAlignmentT(double alignmentT) {
+        this.alignmentT = alignmentT;
+    }
+
+    public double getAlignmentR() {
+        return alignmentR;
+    }
+
+    public void setAlignmentR(double alignmentR) {
+        this.alignmentR = alignmentR;
+    }
+
+    public double getAlignmentB() {
+        return alignmentB;
+    }
+
+    public void setAlignmentB(double alignmentB) {
+        this.alignmentB = alignmentB;
     }
 }

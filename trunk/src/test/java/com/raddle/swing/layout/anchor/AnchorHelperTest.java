@@ -48,10 +48,10 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         LayoutUtils.bindAnchorRB(jDesktopPane1, jButton1, true, false);
         LayoutUtils.bindAnchorRB(jDesktopPane1, jScrollPane1, true, true);
         //相对边框
-        LayoutUtils.bindAnchor(jDesktopPane1, jButton4, 0.5, -1);
+        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0.5, -1);
 
         // 相对浮动
-        LayoutUtils.bindFloatAnchor(jDesktopPane1, jButton3, -1, 0.5);
+        LayoutUtils.bindFloatAnchorLT(jDesktopPane1, jButton3, -1, 0.5);
 
         // 跟随浮动
         LayoutUtils.bindAnchorFollow(jButton3, jButton2, -1, 5, -1, -1);
