@@ -23,8 +23,8 @@ public class LayoutUtils {
      * @param alignmentY 高度百分比
      * @return
      */
-    public static AnchorHelper bindAnchorLT(Container outer, Component self, double alignmentX, double alignmentY) {
-        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, true);
+    public static AnchorHelper bindAnchorLT(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
+        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, true);
         helper.anchor();
         return helper;
     }
@@ -38,8 +38,8 @@ public class LayoutUtils {
      * @param alignmentY 高度百分比
      * @return
      */
-    public static AnchorHelper bindAnchorRB(Container outer, Component self, double alignmentX, double alignmentY) {
-        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, false);
+    public static AnchorHelper bindAnchorRB(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
+        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, false);
         helper.anchor();
         return helper;
     }
@@ -113,8 +113,8 @@ public class LayoutUtils {
      * @param alignmentY 高度百分比
      * @return
      */
-    public static FloatAnchorHelper bindFloatAnchorLT(Container outer, Component self, double alignmentX, double alignmentY) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, true);
+    public static FloatAnchorHelper bindFloatAnchorLT(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
+        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, true);
         helper.floating();
         return helper;
     }
@@ -128,8 +128,8 @@ public class LayoutUtils {
      * @param alignmentY 高度百分比
      * @return
      */
-    public static FloatAnchorHelper bindFloatAnchorRB(Container outer, Component self, double alignmentX, double alignmentY) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, false);
+    public static FloatAnchorHelper bindFloatAnchorRB(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
+        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, false);
         helper.floating();
         return helper;
     }

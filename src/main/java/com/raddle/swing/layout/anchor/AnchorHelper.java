@@ -99,18 +99,30 @@ public class AnchorHelper {
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
-    public AnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, boolean isLT){
+    public AnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad, boolean isLT){
+        anchorType = ANCHOR_TYPE.RELATIVE;
+        dynamicPadding = new DefaultDynamicPadding(outer);
         this.outer = outer;
         this.self = self;
         if (isLT) {
             this.alignmentL = alignmentX;
             this.alignmentT = alignmentY;
+            if (xPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setLeftPad(xPad);
+            }
+            if (yPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setTopPad(yPad);
+            }
         } else {
             this.alignmentR = alignmentX;
             this.alignmentB = alignmentY;
+            if (xPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setRightPad(xPad);
+            }
+            if (yPad > 0) {
+                ((DefaultDynamicPadding) dynamicPadding).setBottomPad(yPad);
+            }
         }
-        anchorType = ANCHOR_TYPE.RELATIVE;
-        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
