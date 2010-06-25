@@ -107,6 +107,8 @@ public class FloatAnchorHelper {
      * @param alignmentY 上边距的百分比
      */
     public FloatAnchorHelper(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad, boolean isLT){
+        this.floatType = FLOAT_TYPE.RELATIVE;
+        dynamicPadding = new DefaultDynamicPadding(outer);
         this.outer = outer;
         this.self = self;
         if (isLT) {
@@ -128,8 +130,6 @@ public class FloatAnchorHelper {
                 ((DefaultDynamicPadding) dynamicPadding).setBottomPad(yPad);
             }
         }
-        this.floatType = FLOAT_TYPE.RELATIVE;
-        dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
     /**
