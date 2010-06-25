@@ -16,7 +16,16 @@ import com.raddle.swing.layout.anchor.dynamic.DefaultDynamicPadding;
  * @author xurong 2009-6-14 下午12:57:21
  */
 public class AnchorHelper {
-
+    public static enum ANCHOR_TYPE {
+        /**
+         * 绝对定位，和边框保持绝对数值的大小
+         */
+        ABSOLUTE,
+        /**
+         * 相对定位，和边框保持外框大小百分之多少的距离
+         */
+        RELATIVE
+    };
     private Container          outer;
     private Component          self;
     private int                leftPad      = -1;
@@ -53,10 +62,10 @@ public class AnchorHelper {
         this.topPad = topPad;
         this.rightPad = rightPad;
         this.bottomPad = bottomPad;
-        this.anchorLeft = leftPad > -1;
-        this.anchorTop = topPad > -1;
-        this.anchorRight = rightPad > -1;
-        this.anchorBottom = bottomPad > -1;
+        this.anchorLeft = leftPad >= 0;
+        this.anchorTop = topPad >= 0;
+        this.anchorRight = rightPad >= 0;
+        this.anchorBottom = bottomPad >= 0;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
@@ -90,25 +99,25 @@ public class AnchorHelper {
 
                 public void componentResized(ComponentEvent evt) {
                     if (anchorLeft) {
-                        if (leftPad == -1) {
+                        if (leftPad < 0) {
                             leftPad = self.getX();
                         }
                         anchorLeft(self, leftPad + dynamicPadding.getLeftPad());
                     }
                     if (anchorTop) {
-                        if (topPad == -1) {
+                        if (topPad < 0) {
                             topPad = self.getY();
                         }
                         anchorTop(self, topPad + dynamicPadding.getTopPad());
                     }
                     if (anchorRight) {
-                        if (rightPad == -1) {
+                        if (rightPad < 0) {
                             rightPad = outer.getWidth() - self.getX() - self.getWidth();
                         }
                         anchorRight(outer, self, rightPad + dynamicPadding.getRightPad());
                     }
                     if (anchorBottom) {
-                        if (bottomPad == -1) {
+                        if (bottomPad < 0) {
                             bottomPad = outer.getHeight() - self.getY() - self.getHeight();
                         }
                         anchorBottom(outer, self, bottomPad + dynamicPadding.getBottomPad());
