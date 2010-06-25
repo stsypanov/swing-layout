@@ -38,8 +38,8 @@ public class FloatAnchorHelper {
     private boolean            anchorBottom = false;
     private boolean            listening    = false;
     private FLOAT_TYPE         floatType    = FLOAT_TYPE.ABSOLUTE;
-    private double              alignmentX   = 0;
-    private double              alignmentY   = 0;
+    private double              alignmentX   = -1;
+    private double              alignmentY   = -1;
     private DynamicPadding dynamicPadding;
 
     public FloatAnchorHelper(Container outer, Component self){
@@ -65,10 +65,10 @@ public class FloatAnchorHelper {
         this.topPad = topPad;
         this.rightPad = rightPad;
         this.bottomPad = bottomPad;
-        this.anchorLeft = leftPad > -1;
-        this.anchorTop = topPad > -1;
-        this.anchorRight = rightPad > -1;
-        this.anchorBottom = bottomPad > -1;
+        this.anchorLeft = leftPad >= 0;
+        this.anchorTop = topPad >= 0;
+        this.anchorRight = rightPad >= 0;
+        this.anchorBottom = bottomPad >= 0;
         this.floatType = FLOAT_TYPE.ABSOLUTE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
@@ -123,25 +123,25 @@ public class FloatAnchorHelper {
                 public void componentResized(ComponentEvent evt) {
                     if (floatType == FLOAT_TYPE.ABSOLUTE) {
                         if (anchorLeft) {
-                            if (leftPad == -1) {
+                            if (leftPad < 0) {
                                 leftPad = self.getX();
                             }
                             self.setLocation(leftPad + dynamicPadding.getLeftPad(), self.getY());
                         }
                         if (anchorTop) {
-                            if (topPad == -1) {
+                            if (topPad < 0) {
                                 topPad = self.getY();
                             }
                             self.setLocation(self.getX(), topPad + dynamicPadding.getTopPad());
                         }
                         if (anchorRight) {
-                            if (rightPad == -1) {
+                            if (rightPad < 0) {
                                 rightPad = outer.getWidth() - self.getX() - self.getWidth();
                             }
                             self.setLocation(outer.getWidth() - (rightPad + dynamicPadding.getRightPad()) - self.getWidth(), self.getY());
                         }
                         if (anchorBottom) {
-                            if (bottomPad == -1) {
+                            if (bottomPad < 0) {
                                 bottomPad = outer.getHeight() - self.getY() - self.getHeight();
                             }
                             self.setLocation(self.getX(), outer.getHeight() - (bottomPad + dynamicPadding.getBottomPad()) - self.getHeight());
