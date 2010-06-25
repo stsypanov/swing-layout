@@ -45,6 +45,7 @@ public class FloatAnchorHelper {
     public FloatAnchorHelper(Container outer, Component self){
         this.outer = outer;
         this.self = self;
+        this.floatType = FLOAT_TYPE.ABSOLUTE;
         dynamicPadding = new DefaultDynamicPadding(outer);
     }
 
