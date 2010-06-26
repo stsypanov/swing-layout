@@ -30,16 +30,20 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
 
     private Container   outer;
     private Component   self;
-    private int         leftPad    = -1;
-    private int         topPad     = -1;
-    private int         rightPad   = -1;
-    private int         bottomPad  = -1;
-    private double      alignmentL = -1;
-    private double      alignmentT = -1;
-    private double      alignmentR = -1;
-    private double      alignmentB = -1;
-    private boolean     listening  = false;
-    private ANCHOR_TYPE anchorType = ANCHOR_TYPE.ABSOLUTE;
+    private int         leftPad         = -1;
+    private int         topPad          = -1;
+    private int         rightPad        = -1;
+    private int         bottomPad       = -1;
+    private double      alignmentL      = -1;
+    private double      alignmentT      = -1;
+    private double      alignmentR      = -1;
+    private double      alignmentB      = -1;
+    private int         tuningLeftPad   = 0;
+    private int         tuningTopPad    = 0;
+    private int         tuningRightPad  = 0;
+    private int         tuningBottomPad = 0;
+    private boolean     listening       = false;
+    private ANCHOR_TYPE anchorType      = ANCHOR_TYPE.ABSOLUTE;
 
     public BorderAnchorHelper(Container outer, Component self){
         this.outer = outer;
@@ -70,16 +74,16 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
                         }
                     } else if (anchorType == ANCHOR_TYPE.RELATIVE) {
                         if (alignmentL >= 0) {
-                            anchorLeft(self, (int) (outer.getWidth() * alignmentL));
+                            anchorLeft(self, (int) (outer.getWidth() * alignmentL) + tuningLeftPad);
                         }
                         if (alignmentT >= 0) {
-                            anchorTop(self, (int) (outer.getHeight() * alignmentT));
+                            anchorTop(self, (int) (outer.getHeight() * alignmentT) + tuningTopPad);
                         }
                         if (alignmentR >= 0) {
-                            anchorRight(outer, self, (int) (outer.getWidth() * alignmentR));
+                            anchorRight(outer, self, (int) (outer.getWidth() * alignmentR) + tuningRightPad);
                         }
                         if (alignmentB >= 0) {
-                            anchorBottom(outer, self, (int) (outer.getHeight() * alignmentB));
+                            anchorBottom(outer, self, (int) (outer.getHeight() * alignmentB) + tuningBottomPad);
                         }
                     }
                 }
@@ -177,7 +181,7 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
     public FixedBorderAnchor anchorBottom() {
         anchorType = ANCHOR_TYPE.ABSOLUTE;
         bottomPad = outer.getHeight() - self.getY() - self.getHeight();
-        if(bottomPad < 0){
+        if (bottomPad < 0) {
             bottomPad = 5;
         }
         return this;
@@ -209,7 +213,7 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
     public FixedBorderAnchor anchorRight() {
         anchorType = ANCHOR_TYPE.ABSOLUTE;
         rightPad = outer.getWidth() - self.getX() - self.getWidth();
-        if(rightPad < 0){
+        if (rightPad < 0) {
             rightPad = 5;
         }
         return this;
@@ -233,6 +237,34 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
     public FixedBorderAnchor anchorTop(int fixedPadding) {
         anchorType = ANCHOR_TYPE.ABSOLUTE;
         topPad = fixedPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeBorderAnchor anchorBottom(double relativePadding, int tuningPadding) {
+        anchorBottom(relativePadding);
+        tuningBottomPad = tuningPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeBorderAnchor anchorLeft(double relativePadding, int tuningPadding) {
+        anchorLeft(relativePadding);
+        tuningLeftPad = tuningPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeBorderAnchor anchorRight(double relativePadding, int tuningPadding) {
+        anchorRight(relativePadding);
+        tuningRightPad = tuningPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeBorderAnchor anchorTop(double relativePadding, int tuningPadding) {
+        anchorTop(relativePadding);
+        tuningTopPad = tuningPadding;
         return this;
     }
 

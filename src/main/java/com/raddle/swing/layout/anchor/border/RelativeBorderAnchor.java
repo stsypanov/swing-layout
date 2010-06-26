@@ -17,4 +17,12 @@ public interface RelativeBorderAnchor {
     public RelativeBorderAnchor anchorRight(double relativePadding);
 
     public RelativeBorderAnchor anchorBottom(double relativePadding);
+
+    public RelativeBorderAnchor anchorLeft(double relativePadding, int tuningPadding);
+
+    public RelativeBorderAnchor anchorTop(double relativePadding, int tuningPadding);
+
+    public RelativeBorderAnchor anchorRight(double relativePadding, int tuningPadding);
+
+    public RelativeBorderAnchor anchorBottom(double relativePadding, int tuningPadding);
 }
