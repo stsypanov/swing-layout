@@ -3,166 +3,99 @@ package com.raddle.swing.layout;
 import java.awt.Component;
 import java.awt.Container;
 
-import com.raddle.swing.layout.anchor.AnchorFollowHelper;
-import com.raddle.swing.layout.anchor.AnchorHelper;
-import com.raddle.swing.layout.anchor.FloatAnchorHelper;
+import com.raddle.swing.layout.anchor.BorderAnchorHelper;
+import com.raddle.swing.layout.anchor.BorderFollowAnchorHelper;
+import com.raddle.swing.layout.anchor.DriftAnchorHelper;
+import com.raddle.swing.layout.anchor.DriftFollowAnchorHelper;
+import com.raddle.swing.layout.anchor.border.FixedBorderAnchor;
+import com.raddle.swing.layout.anchor.border.RelativeBorderAnchor;
+import com.raddle.swing.layout.anchor.drift.FixedDriftAnchor;
+import com.raddle.swing.layout.anchor.drift.RelativeDriftAnchor;
+import com.raddle.swing.layout.anchor.follow.BorderFollowAnchor;
+import com.raddle.swing.layout.anchor.follow.DriftFollowAnchor;
 
 /**
- * 类AnchorUtils.java的实现描述：跟随父框架变大小
+ * 类AnchorUtils.java的实现描述：跟随父框架或周围组件移动或改变大小
  *
  * @author xurong 2009-3-26 上午10:34:38
  */
 public class LayoutUtils {
 
     /**
-     * 左上角相对定位
+     * 固定间距边框跟随外边框，改变大小自身
      *
      * @param outer
      * @param self
-     * @param alignmentX 宽度的百分比
-     * @param alignmentY 高度百分比
      * @return
      */
-    public static AnchorHelper bindAnchorLT(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
-        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, true);
+    public static FixedBorderAnchor anchorFixedBorder(Container outer, Component self) {
+        BorderAnchorHelper helper = new BorderAnchorHelper(outer, self);
         helper.anchor();
         return helper;
     }
 
     /**
-     * 右下角相对定位
+     * 相对比例间距边框跟随外边框，改变大小自身
      *
      * @param outer
      * @param self
-     * @param alignmentX 宽度的百分比
-     * @param alignmentY 高度百分比
      * @return
      */
-    public static AnchorHelper bindAnchorRB(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
-        AnchorHelper helper = new AnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, false);
+    public static RelativeBorderAnchor anchorRelativeBorder(Container outer, Component self) {
+        BorderAnchorHelper helper = new BorderAnchorHelper(outer, self);
         helper.anchor();
         return helper;
     }
 
     /**
-     * 右下绝对定位
+     * 固定间距整体跟随外边框，移动自身位置
      *
      * @param outer
      * @param self
-     * @param rightPad 大于-1，跟随右边框，保持边距rightPad
-     * @param bottomPad 大于-1，跟随下边框，保持边距bottomPad
      * @return
      */
-    public static AnchorHelper bindAnchorRB(Container outer, Component self, int rightPad, int bottomPad) {
-        AnchorHelper helper = new AnchorHelper(outer, self, -1, -1, rightPad, bottomPad);
-        helper.anchor();
+    public static FixedDriftAnchor anchorFixedDrift(Container outer, Component self) {
+        DriftAnchorHelper helper = new DriftAnchorHelper(outer, self);
+        helper.drifting();
         return helper;
     }
 
     /**
-     * 右下绝对定位
+     * 相对比例间距整体跟随外边框，移动自身位置
      *
      * @param outer
      * @param self
-     * @param anchorRight 跟随右边框，保持边距不变
-     * @param anchorBottom 跟随下边框，保持边距不变
      * @return
      */
-    public static AnchorHelper bindAnchorRB(Container outer, Component self, boolean anchorRight, boolean anchorBottom) {
-        AnchorHelper helper = new AnchorHelper(outer, self, false, false, anchorRight, anchorBottom);
-        helper.anchor();
+    public static RelativeDriftAnchor anchorRelativeDrift(Container outer, Component self) {
+        DriftAnchorHelper helper = new DriftAnchorHelper(outer, self);
+        helper.drifting();
         return helper;
     }
 
     /**
-     * 右下浮动，绝对距离
+     * 固定间距整体跟随周围组件，改变自身大小
      *
-     * @param outer
      * @param self
-     * @param rightPad 大于-1，跟随右边框浮动，保持边距rightPad
-     * @param bottomPad 大于-1，跟随下边框浮动，保持边距bottomPad
-     * @return
-     */
-    public static FloatAnchorHelper bindFloatAnchorRB(Container outer, Component self, int rightPad, int bottomPad) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, -1, -1, rightPad, bottomPad);
-        helper.floating();
-        return helper;
-    }
-
-    /**
-     * 右下浮动，绝对距离
-     *
-     * @param outer
-     * @param self
-     * @param anchorRight 跟随右边框浮动，保持边距不变
-     * @param anchorBottom 跟随下边框浮动，保持边距不变
-     * @return
-     */
-    public static FloatAnchorHelper bindFloatAnchorRB(Container outer, Component self, boolean anchorRight, boolean anchorBottom) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, false, false, anchorRight, anchorBottom);
-        helper.floating();
-        return helper;
-    }
-
-    /**
-     * 相对左上浮动
-     *
-     * @param outer
-     * @param self
-     * @param alignmentX 宽度的百分比
-     * @param alignmentY 高度百分比
-     * @return
-     */
-    public static FloatAnchorHelper bindFloatAnchorLT(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, true);
-        helper.floating();
-        return helper;
-    }
-
-    /**
-     * 相对右下浮动
-     *
-     * @param outer
-     * @param self
-     * @param alignmentX 宽度的百分比
-     * @param alignmentY 高度百分比
-     * @return
-     */
-    public static FloatAnchorHelper bindFloatAnchorRB(Container outer, Component self, double alignmentX, double alignmentY, int xPad, int yPad) {
-        FloatAnchorHelper helper = new FloatAnchorHelper(outer, self, alignmentX, alignmentY, xPad, yPad, false);
-        helper.floating();
-        return helper;
-    }
-
-    /**
-     * 跟随旁边的元素
-     *
      * @param followTo
-     * @param self
-     * @param leftPad 大于-1跟随左边元素，左边距保持leftPad
-     * @param topPad 大于-1跟随上元素，上边距保持topPad
-     * @param rightPad 大于-1跟随右元素，右边距保持rightPad
-     * @param bottomPad 大于-1跟随下元素，下边距保持bottomPad
      * @return
      */
-    public static AnchorFollowHelper bindAnchorFollow(Component followTo, Component self, int leftPad, int topPad, int rightPad, int bottomPad) {
-        AnchorFollowHelper helper = new AnchorFollowHelper(followTo, self, leftPad, topPad, rightPad, bottomPad);
-        helper.anchor();
+    public static BorderFollowAnchor anchorBorderFollow(Container self, Component followTo) {
+        BorderFollowAnchorHelper helper = new BorderFollowAnchorHelper(self, followTo);
+        helper.following();
         return helper;
     }
 
     /**
-     * @param followTo
+     * 固定间距整体跟随周围组件，移动自身位置
+     *
      * @param self
-     * @param anchorLeft 跟随左元素，左边距保持不变
-     * @param anchorTop 跟随上元素，上边距保持不变
-     * @param anchorRight 跟随右元素，右边距保持不变
-     * @param anchorBottom 跟随下元素，下边距保持不变
+     * @param followTo
      * @return
      */
-    public static AnchorFollowHelper bindAnchorFollow(Component followTo, Component self, boolean anchorLeft, boolean anchorTop, boolean anchorRight, boolean anchorBottom) {
-        AnchorFollowHelper helper = new AnchorFollowHelper(followTo, self, anchorLeft, anchorTop, anchorRight, anchorBottom);
-        helper.anchor();
+    public static DriftFollowAnchor anchorDriftFollow(Container self, Component followTo) {
+        DriftFollowAnchorHelper helper = new DriftFollowAnchorHelper(self, followTo);
+        helper.following();
         return helper;
     }
 }

@@ -44,16 +44,17 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         super();
         initGUI();
         // 固定边框
-        LayoutUtils.bindAnchorRB(jDesktopPane1, jButton1, true, false);
-        LayoutUtils.bindAnchorRB(jDesktopPane1, jScrollPane1, true, true);
+        LayoutUtils.anchorFixedBorder(jDesktopPane1, jButton1).anchorRight(5);
+        LayoutUtils.anchorFixedBorder(jDesktopPane1, jScrollPane1).anchorRight(5).anchorBottom(5);
         //相对边框
-        LayoutUtils.bindAnchorLT(jDesktopPane1, jButton4, 0.5, -1, -1, -1);
+        LayoutUtils.anchorRelativeBorder(jDesktopPane1, jButton4).anchorLeft(0.5);
+        LayoutUtils.anchorFixedBorder(jDesktopPane1, jButton4).anchorRight(5);
 
-        // 相对浮动
-        LayoutUtils.bindFloatAnchorLT(jDesktopPane1, jButton3, -1, 0.5, -1, -1);
-
-        // 跟随浮动
-        LayoutUtils.bindAnchorFollow(jButton3, jButton2, -1, 5, -1, -1);
+//        // 相对浮动
+        LayoutUtils.anchorRelativeDrift(jDesktopPane1, jButton3).anchorTop(0.5);
+//
+//        // 跟随浮动
+        LayoutUtils.anchorBorderFollow(jButton2, jButton3).followTop(5);
     }
 
     private void initGUI() {
@@ -66,13 +67,13 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                     jButton1 = new JButton();
                     jDesktopPane1.add(jButton1);
                     jButton1.setText("右边框跟随1");
-                    jButton1.setBounds(273, 12, 100, 23);
+                    jButton1.setBounds(273, 12, 150, 23);
                 }
                 {
                     jButton2 = new JButton();
                     jDesktopPane1.add(jButton2);
-                    jButton2.setText("下边框跟随2");
-                    jButton2.setBounds(12, 230, 120, 23);
+                    jButton2.setText("上边框跟随2");
+                    jButton2.setBounds(12, 230, 150, 23);
                 }
                 {
                     jScrollPane1 = new JScrollPane();
@@ -88,7 +89,7 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                     jButton3 = new JButton();
                     jDesktopPane1.add(jButton3);
                     jButton3.setText("纵向中间浮动3");
-                    jButton3.setBounds(12, 12, 120, 23);
+                    jButton3.setBounds(12, 12, 150, 23);
                 }
                 {
                     jButton4 = new JButton();
@@ -109,7 +110,7 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                 }
             }
             pack();
-            setSize(400, 300);
+            setSize(450, 300);
         } catch (Exception e) {
             e.printStackTrace();
         }

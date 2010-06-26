@@ -10,19 +10,19 @@ package com.raddle.swing.layout.anchor.border;
  */
 public interface FixedBorderAnchor {
 
-    public void anchorLeft();
+    public FixedBorderAnchor anchorLeft();
 
-    public void anchorLeft(int fixedPadding);
+    public FixedBorderAnchor anchorLeft(int fixedPadding);
 
-    public void anchorTop();
+    public FixedBorderAnchor anchorTop();
 
-    public void anchorTop(int fixedPadding);
+    public FixedBorderAnchor anchorTop(int fixedPadding);
 
-    public void anchorRight();
+    public FixedBorderAnchor anchorRight();
 
-    public void anchorRight(int fixedPadding);
+    public FixedBorderAnchor anchorRight(int fixedPadding);
 
-    public void anchorBottom();
+    public FixedBorderAnchor anchorBottom();
 
-    public void anchorBottom(int fixedPadding);
+    public FixedBorderAnchor anchorBottom(int fixedPadding);
 }

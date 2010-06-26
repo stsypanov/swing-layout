@@ -10,19 +10,19 @@ package com.raddle.swing.layout.anchor.drift;
  */
 public interface FixedDriftAnchor {
 
-    public void anchorLeft();
+    public FixedDriftAnchor anchorLeft();
 
-    public void anchorLeft(int fixedPadding);
+    public FixedDriftAnchor anchorLeft(int fixedPadding);
 
-    public void anchorTop();
+    public FixedDriftAnchor anchorTop();
 
-    public void anchorTop(int fixedPadding);
+    public FixedDriftAnchor anchorTop(int fixedPadding);
 
-    public void anchorRight();
+    public FixedDriftAnchor anchorRight();
 
-    public void anchorRight(int fixedPadding);
+    public FixedDriftAnchor anchorRight(int fixedPadding);
 
-    public void anchorBottom();
+    public FixedDriftAnchor anchorBottom();
 
-    public void anchorBottom(int fixedPadding);
+    public FixedDriftAnchor anchorBottom(int fixedPadding);
 }
