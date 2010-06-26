@@ -177,6 +177,9 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
     public FixedBorderAnchor anchorBottom() {
         anchorType = ANCHOR_TYPE.ABSOLUTE;
         bottomPad = outer.getHeight() - self.getY() - self.getHeight();
+        if(bottomPad < 0){
+            bottomPad = 5;
+        }
         return this;
     }
 
@@ -206,6 +209,9 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
     public FixedBorderAnchor anchorRight() {
         anchorType = ANCHOR_TYPE.ABSOLUTE;
         rightPad = outer.getWidth() - self.getX() - self.getWidth();
+        if(rightPad < 0){
+            rightPad = 5;
+        }
         return this;
     }
 

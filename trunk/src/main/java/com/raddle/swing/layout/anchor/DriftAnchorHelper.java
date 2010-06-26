@@ -118,6 +118,9 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
     public FixedDriftAnchor anchorBottom() {
         driftType = DRIFT_TYPE.ABSOLUTE;
         bottomPad = outer.getHeight() - self.getY() - self.getHeight();
+        if(bottomPad < 0){
+            bottomPad = 5;
+        }
         return this;
     }
 
@@ -146,6 +149,9 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
     public FixedDriftAnchor anchorRight() {
         driftType = DRIFT_TYPE.ABSOLUTE;
         rightPad = outer.getWidth() - self.getX() - self.getWidth();
+        if(rightPad < 0){
+            rightPad = 5;
+        }
         return this;
     }
 
