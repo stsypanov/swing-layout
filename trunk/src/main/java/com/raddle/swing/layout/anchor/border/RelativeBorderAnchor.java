@@ -10,11 +10,11 @@ package com.raddle.swing.layout.anchor.border;
  */
 public interface RelativeBorderAnchor {
 
-    public void anchorLeft(double relativePadding);
+    public RelativeBorderAnchor anchorLeft(double relativePadding);
 
-    public void anchorTop(double relativePadding);
+    public RelativeBorderAnchor anchorTop(double relativePadding);
 
-    public void anchorRight(double relativePadding);
+    public RelativeBorderAnchor anchorRight(double relativePadding);
 
-    public void anchorBottom(double relativePadding);
+    public RelativeBorderAnchor anchorBottom(double relativePadding);
 }

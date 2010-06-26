@@ -10,11 +10,11 @@ package com.raddle.swing.layout.anchor.drift;
  */
 public interface RelativeDriftAnchor {
 
-    public void anchorLeft(double relativePadding);
+    public RelativeDriftAnchor anchorLeft(double relativePadding);
 
-    public void anchorTop(double relativePadding);
+    public RelativeDriftAnchor anchorTop(double relativePadding);
 
-    public void anchorRight(double relativePadding);
+    public RelativeDriftAnchor anchorRight(double relativePadding);
 
-    public void anchorBottom(double relativePadding);
+    public RelativeDriftAnchor anchorBottom(double relativePadding);
 }
