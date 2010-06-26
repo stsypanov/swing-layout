@@ -132,6 +132,9 @@ public class BorderFollowAnchorHelper implements BorderFollowAnchor {
     @Override
     public void followBottom() {
         bottomPad = followTo.getY() - self.getY() - followTo.getHeight();
+        if(bottomPad < 0){
+            bottomPad = 5;
+        }
     }
 
     @Override
@@ -143,6 +146,9 @@ public class BorderFollowAnchorHelper implements BorderFollowAnchor {
     @Override
     public void followLeft() {
         leftPad = self.getX() - followTo.getX() - followTo.getWidth();
+        if(leftPad < 0){
+            leftPad = 5;
+        }
     }
 
     @Override
@@ -153,6 +159,9 @@ public class BorderFollowAnchorHelper implements BorderFollowAnchor {
     @Override
     public void followRight() {
         rightPad = followTo.getX() - self.getX() - self.getWidth();
+        if(rightPad < 0){
+            rightPad = 5;
+        }
     }
 
     @Override
@@ -163,6 +172,9 @@ public class BorderFollowAnchorHelper implements BorderFollowAnchor {
     @Override
     public void followTop() {
         topPad = self.getY() - followTo.getY() - self.getHeight();
+        if(topPad < 0){
+            topPad = 5;
+        }
     }
 
 }
