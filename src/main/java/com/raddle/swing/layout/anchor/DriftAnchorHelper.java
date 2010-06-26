@@ -77,7 +77,7 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
                             self.setLocation(outer.getWidth() - ((int) (outer.getWidth() * alignmentR)) - self.getWidth(), self.getY());
                         }
                         if (alignmentB >= 0) {
-                            self.setLocation(self.getX(), outer.getHeight() - ((int) (outer.getHeight() * alignmentR)) - self.getHeight());
+                            self.setLocation(self.getX(), outer.getHeight() - ((int) (outer.getHeight() * alignmentB)) - self.getHeight());
                         }
                     }
 
