@@ -28,16 +28,20 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
 
     private Container  outer;
     private Component  self;
-    private int        leftPad    = -1;
-    private int        topPad     = -1;
-    private int        rightPad   = -1;
-    private int        bottomPad  = -1;
-    private double     alignmentL = -1;
-    private double     alignmentT = -1;
-    private double     alignmentR = -1;
-    private double     alignmentB = -1;
-    private boolean    listening  = false;
-    private DRIFT_TYPE driftType  = DRIFT_TYPE.ABSOLUTE;
+    private int        leftPad         = -1;
+    private int        topPad          = -1;
+    private int        rightPad        = -1;
+    private int        bottomPad       = -1;
+    private double     alignmentL      = -1;
+    private double     alignmentT      = -1;
+    private double     alignmentR      = -1;
+    private double     alignmentB      = -1;
+    private int        tuningLeftPad   = 0;
+    private int        tuningTopPad    = 0;
+    private int        tuningRightPad  = 0;
+    private int        tuningBottomPad = 0;
+    private boolean    listening       = false;
+    private DRIFT_TYPE driftType       = DRIFT_TYPE.ABSOLUTE;
 
     public DriftAnchorHelper(Container outer, Component self){
         this.outer = outer;
@@ -68,16 +72,16 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
                         }
                     } else if (driftType == DRIFT_TYPE.RELATIVE) {
                         if (alignmentL >= 0) {
-                            self.setLocation((int) (outer.getWidth() * alignmentL), self.getY());
+                            self.setLocation((int) (outer.getWidth() * alignmentL) + tuningLeftPad, self.getY());
                         }
                         if (alignmentT >= 0) {
-                            self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentT));
+                            self.setLocation(self.getX(), (int) (outer.getHeight() * alignmentT) + tuningTopPad);
                         }
                         if (alignmentR >= 0) {
-                            self.setLocation(outer.getWidth() - ((int) (outer.getWidth() * alignmentR)) - self.getWidth(), self.getY());
+                            self.setLocation(outer.getWidth() - ((int) (outer.getWidth() * alignmentR)) - self.getWidth() + tuningRightPad, self.getY());
                         }
                         if (alignmentB >= 0) {
-                            self.setLocation(self.getX(), outer.getHeight() - ((int) (outer.getHeight() * alignmentB)) - self.getHeight());
+                            self.setLocation(self.getX(), outer.getHeight() - ((int) (outer.getHeight() * alignmentB)) - self.getHeight() + tuningBottomPad);
                         }
                     }
 
@@ -118,7 +122,7 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
     public FixedDriftAnchor anchorBottom() {
         driftType = DRIFT_TYPE.ABSOLUTE;
         bottomPad = outer.getHeight() - self.getY() - self.getHeight();
-        if(bottomPad < 0){
+        if (bottomPad < 0) {
             bottomPad = 5;
         }
         return this;
@@ -149,7 +153,7 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
     public FixedDriftAnchor anchorRight() {
         driftType = DRIFT_TYPE.ABSOLUTE;
         rightPad = outer.getWidth() - self.getX() - self.getWidth();
-        if(rightPad < 0){
+        if (rightPad < 0) {
             rightPad = 5;
         }
         return this;
@@ -176,4 +180,31 @@ public class DriftAnchorHelper implements FixedDriftAnchor, RelativeDriftAnchor 
         return this;
     }
 
+    @Override
+    public RelativeDriftAnchor anchorBottom(double relativePadding, int tuningPadding) {
+        anchorBottom(relativePadding);
+        tuningBottomPad = tuningPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeDriftAnchor anchorLeft(double relativePadding, int tuningPadding) {
+        anchorLeft(relativePadding);
+        tuningLeftPad = tuningPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeDriftAnchor anchorRight(double relativePadding, int tuningPadding) {
+        anchorRight(relativePadding);
+        tuningRightPad = tuningPadding;
+        return this;
+    }
+
+    @Override
+    public RelativeDriftAnchor anchorTop(double relativePadding, int tuningPadding) {
+        anchorTop(relativePadding);
+        tuningTopPad = tuningPadding;
+        return this;
+    }
 }

@@ -17,4 +17,12 @@ public interface RelativeDriftAnchor {
     public RelativeDriftAnchor anchorRight(double relativePadding);
 
     public RelativeDriftAnchor anchorBottom(double relativePadding);
+
+    public RelativeDriftAnchor anchorLeft(double relativePadding, int tuningPadding);
+
+    public RelativeDriftAnchor anchorTop(double relativePadding, int tuningPadding);
+
+    public RelativeDriftAnchor anchorRight(double relativePadding, int tuningPadding);
+
+    public RelativeDriftAnchor anchorBottom(double relativePadding, int tuningPadding);
 }
