@@ -44,16 +44,17 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         super();
         initGUI();
         // 固定边框
-        LayoutUtils.anchorFixedBorder(jDesktopPane1, jButton1).anchorRight(5);
-        LayoutUtils.anchorFixedBorder(jDesktopPane1, jScrollPane1).anchorRight(5).anchorBottom(5);
+        LayoutUtils.anchorFixedBorder(jDesktopPane1, jScrollPane1).anchorRight().anchorBottom();
         //相对边框
         LayoutUtils.anchorRelativeBorder(jDesktopPane1, jButton4).anchorLeft(0.5);
-        LayoutUtils.anchorFixedBorder(jDesktopPane1, jButton4).anchorRight(5);
+        LayoutUtils.anchorFixedBorder(jDesktopPane1, jButton4).anchorRight();
 
-//        // 相对浮动
-        LayoutUtils.anchorRelativeDrift(jDesktopPane1, jButton3).anchorTop(0.5);
-//
-//        // 跟随浮动
+        // 固定浮动
+        LayoutUtils.anchorFixedDrift(jDesktopPane1, jButton1).anchorRight();
+        // 相对浮动
+        LayoutUtils.anchorRelativeDrift(jDesktopPane1, jButton3).anchorBottom(0.5);
+
+        // 跟随边框
         LayoutUtils.anchorBorderFollow(jButton2, jButton3).followTop(5);
     }
 
@@ -66,13 +67,13 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                 {
                     jButton1 = new JButton();
                     jDesktopPane1.add(jButton1);
-                    jButton1.setText("右边框跟随1");
+                    jButton1.setText("1右边框FixedDrift");
                     jButton1.setBounds(273, 12, 150, 23);
                 }
                 {
                     jButton2 = new JButton();
                     jDesktopPane1.add(jButton2);
-                    jButton2.setText("上边框跟随2");
+                    jButton2.setText("2上边框BorderFollow");
                     jButton2.setBounds(12, 230, 150, 23);
                 }
                 {
@@ -82,19 +83,19 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                     {
                         jTextPane1 = new JTextPane();
                         jScrollPane1.setViewportView(jTextPane1);
-                        jTextPane1.setText("右下角跟随右下角跟随右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n");
+                        jTextPane1.setText("FixedBorder右下角跟随右下角跟随右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n右下角跟随\n");
                     }
                 }
                 {
                     jButton3 = new JButton();
                     jDesktopPane1.add(jButton3);
-                    jButton3.setText("纵向中间浮动3");
+                    jButton3.setText("3纵向RelativeDrift");
                     jButton3.setBounds(12, 12, 150, 23);
                 }
                 {
                     jButton4 = new JButton();
                     jDesktopPane1.add(jButton4);
-                    jButton4.setText("跟随中间和右边4");
+                    jButton4.setText("4跟随RB+FB");
                     jButton4.setBounds(287, 52, 150, 23);
                     jButton4.addActionListener(new ActionListener() {
 
