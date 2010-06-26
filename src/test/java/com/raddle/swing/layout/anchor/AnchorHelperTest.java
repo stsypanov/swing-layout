@@ -45,7 +45,7 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         initGUI();
         // 固定边框
         LayoutUtils.anchorFixedBorder(jDesktopPane1, jScrollPane1).anchorRight().anchorBottom();
-        //相对边框
+        // 相对边框
         LayoutUtils.anchorRelativeBorder(jDesktopPane1, jButton4).anchorLeft(0.5);
         LayoutUtils.anchorFixedBorder(jDesktopPane1, jButton4).anchorRight();
 
@@ -54,8 +54,10 @@ public class AnchorHelperTest extends javax.swing.JFrame {
         // 相对浮动
         LayoutUtils.anchorRelativeDrift(jDesktopPane1, jButton3).anchorBottom(0.5);
 
-        // 跟随边框
+        // 边框跟随组件
         LayoutUtils.anchorBorderFollow(jButton2, jButton3).followTop(5);
+        // 组件跟随组件
+        LayoutUtils.anchorDriftFollow(jButton5, jButton1).followRight(5);
     }
 
     private void initGUI() {
@@ -106,8 +108,8 @@ public class AnchorHelperTest extends javax.swing.JFrame {
                 {
                     jButton5 = new JButton();
                     jDesktopPane1.add(jButton5);
-                    jButton5.setText("jButton5");
-                    jButton5.setBounds(108, 101, 118, 23);
+                    jButton5.setText("5DriftFollow1");
+                    jButton5.setBounds(108, 101, 150, 23);
                 }
             }
             pack();

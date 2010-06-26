@@ -7,8 +7,6 @@ import java.awt.Component;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-import javax.swing.JScrollPane;
-
 import com.raddle.swing.layout.anchor.follow.DriftFollowAnchor;
 
 /**
@@ -50,77 +48,19 @@ public class DriftFollowAnchorHelper implements DriftFollowAnchor {
 
                 private void followTo() {
                     if (leftPad >= 0) {
-                        anchorLeft(self, followTo, leftPad);
+                        self.setLocation(followTo.getX() + followTo.getWidth() + leftPad, self.getY());
                     }
                     if (topPad >= 0) {
-                        anchorTop(self, followTo, topPad);
+                        self.setLocation(self.getX(), followTo.getY() + followTo.getHeight() + topPad);
                     }
                     if (rightPad >= 0) {
-                        anchorRight(self, followTo, rightPad);
+                        self.setLocation(followTo.getX() - self.getWidth() - rightPad, self.getY());
                     }
                     if (bottomPad >= 0) {
-                        anchorBottom(self, followTo, bottomPad);
+                        self.setLocation(self.getX(), followTo.getY() - self.getHeight() - bottomPad);
                     }
                 }
             });
-        }
-    }
-
-    /**
-     * 跟随左边
-     *
-     * @param self 需要调整的组件
-     * @param spacing 左边距
-     */
-    private void anchorLeft(Component self, Component followTo, int spacing) {
-        self.setBounds(followTo.getX() + followTo.getWidth() + spacing, self.getY(), self.getWidth() + (self.getX() - spacing - followTo.getX() - followTo.getWidth()), self.getHeight());
-        if (self instanceof JScrollPane) {
-            JScrollPane container = (JScrollPane) self;
-            anchorLeft(container.getViewport().getView(), followTo, 0);
-        }
-    }
-
-    /**
-     * 跟随右边
-     *
-     * @param outer 外部要跟随的组件
-     * @param self 需要调整的组件
-     * @param spacing 右边距
-     */
-    private void anchorRight(Component self, Component followTo, int spacing) {
-        self.setSize(followTo.getX() - self.getX() - spacing, self.getHeight());
-        if (self instanceof JScrollPane) {
-            JScrollPane container = (JScrollPane) self;
-            anchorRight(container.getViewport().getView(), followTo, 5);
-        }
-    }
-
-    /**
-     * 跟随上边
-     *
-     * @param self 需要调整的组件
-     * @param spacing 上边距
-     */
-    private void anchorTop(Component self, Component followTo, int spacing) {
-        self.setBounds(self.getX(), followTo.getY() + followTo.getHeight() + spacing, self.getWidth(), self.getHeight() + (self.getY() - spacing - followTo.getY() - followTo.getHeight()));
-        if (self instanceof JScrollPane) {
-            JScrollPane container = (JScrollPane) self;
-            anchorTop(container.getViewport().getView(), followTo, 0);
-        }
-    }
-
-    /**
-     * 跟随下边
-     *
-     * @param outer 外部要跟随的组件
-     * @param self 需要调整的组件
-     * @param spacing 下边距
-     */
-    private void anchorBottom(Component self, Component followTo, int spacing) {
-        self.setSize(self.getWidth(), followTo.getY() - self.getY() - spacing);
-        if (self instanceof JScrollPane) {
-            JScrollPane container = (JScrollPane) self;
-            anchorBottom(container.getViewport().getView(), followTo, 5);
         }
     }
 
