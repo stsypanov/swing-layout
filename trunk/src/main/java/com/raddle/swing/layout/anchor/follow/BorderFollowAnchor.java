@@ -11,19 +11,19 @@ package com.raddle.swing.layout.anchor.follow;
  */
 public interface BorderFollowAnchor {
 
-    public void followLeft();
+    public BorderFollowAnchor followLeft();
 
-    public void followLeft(int fixedPadding);
+    public BorderFollowAnchor followLeft(int fixedPadding);
 
-    public void followTop();
+    public BorderFollowAnchor followTop();
 
-    public void followTop(int fixedPadding);
+    public BorderFollowAnchor followTop(int fixedPadding);
 
-    public void followRight();
+    public BorderFollowAnchor followRight();
 
-    public void followRight(int fixedPadding);
+    public BorderFollowAnchor followRight(int fixedPadding);
 
-    public void followBottom();
+    public BorderFollowAnchor followBottom();
 
-    public void followBottom(int fixedPadding);
+    public BorderFollowAnchor followBottom(int fixedPadding);
 }

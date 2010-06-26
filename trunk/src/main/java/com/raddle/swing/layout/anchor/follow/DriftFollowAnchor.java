@@ -11,19 +11,19 @@ package com.raddle.swing.layout.anchor.follow;
  */
 public interface DriftFollowAnchor {
 
-    public void followLeft();
+    public DriftFollowAnchor followLeft();
 
-    public void followLeft(int fixedPadding);
+    public DriftFollowAnchor followLeft(int fixedPadding);
 
-    public void followTop();
+    public DriftFollowAnchor followTop();
 
-    public void followTop(int fixedPadding);
+    public DriftFollowAnchor followTop(int fixedPadding);
 
-    public void followRight();
+    public DriftFollowAnchor followRight();
 
-    public void followRight(int fixedPadding);
+    public DriftFollowAnchor followRight(int fixedPadding);
 
-    public void followBottom();
+    public DriftFollowAnchor followBottom();
 
-    public void followBottom(int fixedPadding);
+    public DriftFollowAnchor followBottom(int fixedPadding);
 }
