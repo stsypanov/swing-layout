@@ -6,6 +6,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 
 import com.raddle.swing.layout.anchor.border.FixedBorderAnchor;
 import com.raddle.swing.layout.anchor.border.RelativeBorderAnchor;
@@ -58,6 +59,7 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
             listening = true;
             outer.addComponentListener(new ComponentAdapter() {
 
+                @Override
                 public void componentResized(ComponentEvent evt) {
                     if (anchorType == ANCHOR_TYPE.ABSOLUTE) {
                         if (leftPad >= 0) {
@@ -85,6 +87,11 @@ public class BorderAnchorHelper implements FixedBorderAnchor, RelativeBorderAnch
                         if (alignmentB >= 0) {
                             anchorBottom(outer, self, (int) (outer.getHeight() * alignmentB) + tuningBottomPad);
                         }
+                    }
+                    if (self instanceof JSplitPane) {
+                        // 强刷新一下界面，ui刷新总是慢一步
+                        JSplitPane container = (JSplitPane) self;
+                        container.setDividerLocation(container.getDividerLocation());
                     }
                 }
             });

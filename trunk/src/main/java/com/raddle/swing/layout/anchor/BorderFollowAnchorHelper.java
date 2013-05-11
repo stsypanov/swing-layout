@@ -8,6 +8,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 
 import com.raddle.swing.layout.anchor.follow.BorderFollowAnchor;
 
@@ -39,6 +40,7 @@ public class BorderFollowAnchorHelper implements BorderFollowAnchor {
             listening = true;
             followTo.addComponentListener(new ComponentAdapter() {
 
+                @Override
                 public void componentResized(ComponentEvent evt) {
                     followTo();
                 }
@@ -60,6 +62,11 @@ public class BorderFollowAnchorHelper implements BorderFollowAnchor {
                     }
                     if (bottomPad >= 0) {
                         anchorBottom(self, followTo, bottomPad);
+                    }
+                    if (self instanceof JSplitPane) {
+                        // 强刷新一下界面，ui刷新总是慢一步
+                        JSplitPane container = (JSplitPane) self;
+                        container.setDividerLocation(container.getDividerLocation());
                     }
                 }
             });
